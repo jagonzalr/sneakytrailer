@@ -1,0 +1,7 @@
+{
+  "generator-react-webpack": {
+    "appName": "sneakytrailer",
+    "style": "scss",
+    "postcss": true
+  }
+}

@@ -1,0 +1,274 @@
+
+@import url(https://fonts.googleapis.com/css?family=Oswald:700|Raleway&subset=latin-ext);
+
+// Overwrite
+body {
+  font-family: 'Raleway', sans-serif;
+  background-color: #F3F6FB;
+  color: #1C252C;
+  padding-top: 70px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: bold;
+  color: #33363A;
+}
+
+.navbar-default {
+  background-color: #FDFDFD;
+  border-color: #DDE3EA;
+
+  .navbar-nav > {
+    li > a {
+      color: #86858D;
+      &:focus {
+        color: #86858D;
+      }
+    }
+    .active > a {
+      color: #33363A;
+      background-color: #FDFDFD;
+      &:focus, &:hover {
+        color: #33363A;
+        background-color: #FDFDFD;
+      }
+    }
+  }
+
+  .navbar-brand {
+    font-family: 'Oswald', sans-serif;
+    font-weight: bold;
+    color: #01B560;
+    &:focus {
+      font-family: 'Oswald', sans-serif;
+      font-weight: bold;
+      color: #01B560;
+    }
+    &:hover {
+      color: #01B560;
+    }
+  }
+  .navbar-nav > li > a:hover {
+    color: #86858D;
+    text-decoration: underline;
+  }
+}
+
+.Select {
+  font-family: 'Raleway', sans-serif;
+}
+
+.Select-clear {
+    display: none;
+    font-size: 18px;
+    line-height: 1;
+}
+
+// Custom
+
+.main-box {
+  background: #FDFDFD;
+  border: 1px solid #DDE3EA;
+  padding: 0 20px 20px 20px;
+  margin: 0 0 20px;
+
+  .main-box-header {
+    border-bottom: 1px solid #DDE3EA;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding: 15px 0;
+    align-items: baseline;
+    width: 95%;
+  }
+
+  .main-box-content {
+    margin-top: 20px;
+  }
+}
+
+/*
+* My Tasks styles
+*/
+
+.async-recent-activity-container {
+  background-color: lighten(#FCFDFD, 5%);
+
+  .async-recent-activity-title {
+
+    h2 {
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 1em;
+      text-align: center;
+    }
+  }
+
+  .my-task-anchor {
+
+    .my-task-container {
+      color: lighten(#4C6DE4, 10%);
+      margin: 10px;
+      padding: 10px;
+      background-color: lighten(#FCFDFD, 5%);
+      border-bottom: 1px solid;
+      border-color: lighten(#4C6DE4, 5%);
+
+      transition: all .3s ease-out 0s;
+      -webkit-transition: all .3s ease-out 0s;
+      -moz-transition: all .3s ease-out 0s;
+      -o-transition: all .3s ease-out 0s;
+
+      &:hover {
+        color: #4C6DE4;
+        transition: all .3s ease-out 0s;
+        -webkit-transition: all .3s ease-out 0s;
+        -moz-transition: all .3s ease-out 0s;
+        -o-transition: all .3s ease-out 0s;
+      }
+
+      .my-task-title {
+        font-weight: normal;
+        font-size: 0.9em;
+        margin: auto;
+      }
+
+      .my-task-subtitle {
+        font-weight: bold;
+        font-size: 0.9em;
+        text-transform: uppercase;
+        margin: auto;
+      }
+    }
+  }
+}
+
+/*
+* Recent Activity styles
+*/
+
+.async-recent-activity-container {
+  background-color: lighten(#FCFDFD, 5%);
+
+  .async-recent-activity-title {
+
+    h2 {
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 1em;
+      text-align: center;
+    }
+  }
+
+  .recent-activity-anchor {
+
+    .recent-activity-container {
+      color: lighten(#4C6DE4, 10%);
+      margin: 10px;
+      padding: 10px;
+      background-color: lighten(#FCFDFD, 5%);
+      border-bottom: 1px solid;
+      border-color: lighten(#4C6DE4, 5%);
+
+      transition: all .3s ease-out 0s;
+      -webkit-transition: all .3s ease-out 0s;
+      -moz-transition: all .3s ease-out 0s;
+      -o-transition: all .3s ease-out 0s;
+
+      &:hover {
+        color: #4C6DE4;
+        transition: all .3s ease-out 0s;
+        -webkit-transition: all .3s ease-out 0s;
+        -moz-transition: all .3s ease-out 0s;
+        -o-transition: all .3s ease-out 0s;
+      }
+
+      .recent-activity-title {
+        font-weight: normal;
+        font-size: 0.9em;
+        margin: auto;
+      }
+
+      .recent-activity-subtitle {
+        font-weight: bold;
+        font-size: 0.9em;
+        text-transform: uppercase;
+        margin: auto;
+      }
+
+      .recent-activity-responsible {
+        p {
+          font-weight: normal;
+          font-size: 0.9em;
+          float: right;
+          margin: auto;
+        }
+      }
+
+      .recent-activity-datetime {
+        p {
+          font-weight: bold;
+          font-size: 0.7em;
+          float: right;
+          margin: auto;
+        }
+      }
+    }
+  }
+}
+
+/*
+* Team Card styles
+*/
+
+.team-card-anchor {
+  .team-card-container {
+  
+    color: #FCFDFD;
+    margin: 10px;
+    padding: 40px 10px 20px 10px;
+    border-radius: 4px;
+    background-color: lighten(#4C6DE4, 5%);
+    border: 2px solid lighten(#4C6DE4, 5%);
+
+    transition: all .3s ease-out 0s;
+    -webkit-transition: all .3s ease-out 0s;
+    -moz-transition: all .3s ease-out 0s;
+    -o-transition: all .3s ease-out 0s;
+
+    &:hover {
+      background-color: #4C6DE4; //#4D524B;
+      border: 2px solid #4C6DE4; //#4D524B;
+
+      transition: all .3s ease-out 0s;
+      -webkit-transition: all .3s ease-out 0s;
+      -moz-transition: all .3s ease-out 0s;
+      -o-transition: all .3s ease-out 0s;
+    }
+
+    .team-card-name {
+      h2 {
+        margin: auto;
+        font-size: 2.0em;
+        font-weight: normal;
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+      }
+    }
+
+    .team-card-confidence {
+      margin-top: 20px;
+      p {
+        margin: auto;
+        font-size: 2.0em;
+        font-family: 'Oswald', sans-serif;
+        font-weight: normal;
+      }
+    }
+  }
+}
