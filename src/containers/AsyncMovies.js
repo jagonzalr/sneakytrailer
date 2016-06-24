@@ -1,7 +1,10 @@
 
 import React, { PropTypes, Component } from 'react'
+import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 import Select from 'react-select'
+import ScrollToTop from 'react-scroll-up'
+import TweenFunctions from 'tween-functions'
 
 import { fetchMovies } from '../actions'
 import {
@@ -19,21 +22,61 @@ class AsyncMovies extends Component {
     super(props)
 
     this.logChange = this.logChange.bind(this)
+    this.previousPage = this.previousPage.bind(this)
+    this.nextPage = this.nextPage.bind(this)
+    this.scrollStep = this.scrollStep.bind(this)
+    this.stopScrolling = this.stopScrolling.bind(this)
 
     this.state = {
-      filter: API_MOVIE_NOW_PLAYING
+      filter: API_MOVIE_NOW_PLAYING,
+      startValue: 0,
+      currentTime: 0, // store current time of animation
+      startTime: null,
+      rafId: null
     }
   }
 
   componentDidMount() {
-    this.props.dispatch(fetchMovies(this.state.filter))
+    this.props.dispatch(fetchMovies(this.state.filter, 0))
   }
 
   logChange(select) {
     if (select) {
       this.setState({filter: select.value})
-      this.props.dispatch(fetchMovies(select.value))
+      this.props.dispatch(fetchMovies(select.value, 0))
     }
+  }
+
+  previousPage(e) {
+    e.preventDefault()
+    var previousPage = this.props.page - 1 
+    this.setState({startValue: window.pageYOffset, currentTime: 0, startTime: null, rafId: window.requestAnimationFrame(this.scrollStep)})
+    this.props.dispatch(fetchMovies(this.state.filter, previousPage))
+  }
+
+  nextPage(e) {
+    e.preventDefault() 
+    var nextPage = this.props.page + 1
+    this.setState({startValue: window.pageYOffset, currentTime: 0, startTime: null, rafId: window.requestAnimationFrame(this.scrollStep)})
+    this.props.dispatch(fetchMovies(this.state.filter, nextPage))
+  }
+
+  scrollStep() {
+    var timestamp = Date()
+
+    var position = TweenFunctions['easeOutCubic'](timestamp, this.state.startValue, 0, 500);
+
+    if (window.pageYOffset <= 0) {
+        this.stopScrolling();
+    } else {
+        window.scrollTo(window.pageYOffset, position);
+        this.setState({rafId:window.requestAnimationFrame(this.scrollStep)})
+    }
+  }
+
+  stopScrolling() {
+    console.log('stopScrolling')
+    window.cancelAnimationFrame(this.state.rafId);
   }
 
   render() {
@@ -45,16 +88,23 @@ class AsyncMovies extends Component {
       { value: API_MOVIE_UPCOMING, label: 'Upcoming' }
     ]
 
+    var title = {
+      API_MOVIE_NOW_PLAYING: 'Now Playing',
+      API_MOVIE_POPULAR: 'Popular',
+      API_MOVIE_TOP_RATED: 'Top Rated',
+      API_MOVIE_UPCOMING: 'Upcoming'
+    }
+
     return (
       <div>
         <NavBar />
-        <div className="container">
+        <div className="container-fluid">
           <section className="main-box">
             <div className="row">
               <div className="col-xs-12 main-box-header">
                 
                   <div className="col-xs-6 col-sm-9">
-                    <h3>Movies</h3>
+                    <h3>{title[this.state.filter]}</h3>
                   </div>
                   <div className="col-xs-6 col-sm-3">
                     <Select
@@ -70,7 +120,19 @@ class AsyncMovies extends Component {
             {this.props.movies.length > 0 &&
               <Movies movies={this.props.movies} />
             }
+            <nav>
+              <ul className="pager">
+                <li className={this.props.page === 1 ? 'disabled' : ''} style={{marginRight: '5px'}}><a href="#" onClick={this.previousPage}>Previous</a></li>
+                <li className={this.props.page === this.props.totalPages ? 'disabled' : ''}><a href="#" onClick={this.nextPage}>Next</a></li>
+              </ul>
+            </nav>
           </section>
+          <ScrollToTop showUnder={250}>
+            <span className="fa-stack fa-2x">
+              <i className="fa fa-circle fa-stack-2x" style={{color: '#01B560'}}></i>
+              <i className="fa fa-angle-double-up fa-stack-1x fa-inverse"></i>
+            </span>
+          </ScrollToTop>
         </div>
       </div>
     )
@@ -78,19 +140,27 @@ class AsyncMovies extends Component {
 }
 
 AsyncMovies.propTypes = {
-  movies: PropTypes.array.isRequired
+  movies: PropTypes.array.isRequired,
+  page: PropTypes.number.isRequired,
+  totalPages: PropTypes.number.isRequired
 }
 
 function mapStateToProps(state) {
   const { rootReducer } = state
 
   const {
-    movies: movies
+    movies: movies,
+    page: page,
+    totalPages: totalPages
   } = rootReducer.fetchMovies || {
-    movies: []
+    movies: [],
+    page: 1,
+    totalPages: 1
   }
   return {
-    movies
+    movies,
+    page,
+    totalPages
   }
 }
 

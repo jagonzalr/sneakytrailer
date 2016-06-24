@@ -5,10 +5,7 @@ import React, {
 } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Main from '../components/Main';
 
-import TeamCard from '../components/TeamCard'
-import AsyncRecentActivity from '../containers/AsyncRecentActivity'
 import AsyncMovies from '../containers/AsyncMovies'
 
 /* Populated by react-webpack-redux:reducer */

@@ -12,6 +12,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Oswald', sans-serif;
   font-weight: bold;
+  margin-top: 10px;
   color: #33363A;
 }
 
@@ -55,8 +56,39 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+.pager {
+  li {
+    a {
+      display: inline-block;
+      color: #01B560;
+      padding: 5px 14px;
+      background-color: #FDFDFD;
+      border: 1px solid #01B560;
+      border-radius: 15px;
+
+      transition: all .3s ease-out 0s;
+      -webkit-transition: all .3s ease-out 0s;
+      -moz-transition: all .3s ease-out 0s;
+      -o-transition: all .3s ease-out 0s;
+
+      &:hover {
+        background-color: #01B560;
+        color: #FDFDFD;
+        border: 1px solid #01B560;
+
+        transition: all .3s ease-out 0s;
+        -webkit-transition: all .3s ease-out 0s;
+        -moz-transition: all .3s ease-out 0s;
+        -o-transition: all .3s ease-out 0s;
+      }
+    }
+  }
+}
+
 .Select {
   font-family: 'Raleway', sans-serif;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .Select-clear {
@@ -91,6 +123,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 20px;
   }
 }
+
 
 /*
 * My Tasks styles

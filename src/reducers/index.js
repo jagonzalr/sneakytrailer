@@ -14,7 +14,6 @@ export function fetchMovies(state = {
     case REQUEST_FETCH_MOVIES:
       return state
     case RECEIVE_FETCH_MOVIES:
-      console.log(action.json)
       return Object.assign({}, state, {
         movies: action.json.results,
         page: action.json.page,
