@@ -1,10 +1,13 @@
 
-@import url(https://fonts.googleapis.com/css?family=Oswald:700|Raleway&subset=latin-ext);
+@import url(https://fonts.googleapis.com/css?family=Oswald:400,700|Raleway&subset=latin-ext);
+
+// Variables
+$brand-color: #df405a;
 
 // Overwrite
 body {
   font-family: 'Raleway', sans-serif;
-  background-color: #F3F6FB;
+  background-color: #f9f9f9;
   color: #1C252C;
   padding-top: 70px;
 }
@@ -14,6 +17,28 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
   margin-top: 10px;
   color: #33363A;
+}
+
+h1 { font-size: 50px; }
+
+h2 {
+  font-size: 45px;
+}
+
+h3 {
+  font-size: 40px;
+}
+
+h4 {
+  font-size: 35px;
+}
+
+h5 {
+  font-size: 30px;
+}
+
+h6 {
+  font-size: 25px;
 }
 
 .navbar-default {
@@ -40,14 +65,14 @@ h1, h2, h3, h4, h5, h6 {
   .navbar-brand {
     font-family: 'Oswald', sans-serif;
     font-weight: bold;
-    color: #01B560;
+    color: $brand-color;
     &:focus {
       font-family: 'Oswald', sans-serif;
       font-weight: bold;
-      color: #01B560;
+      color: $brand-color;
     }
     &:hover {
-      color: #01B560;
+      color: $brand-color;
     }
   }
   .navbar-nav > li > a:hover {
@@ -60,10 +85,13 @@ h1, h2, h3, h4, h5, h6 {
   li {
     a {
       display: inline-block;
-      color: #01B560;
-      padding: 5px 14px;
+      color: $brand-color;
+      padding: 10px 30px;
+      font-family: 'Oswald', sans-serif;
+      font-weight: normal;
+      font-size: 18px;
       background-color: #FDFDFD;
-      border: 1px solid #01B560;
+      border: 2px solid $brand-color;
       border-radius: 15px;
 
       transition: all .3s ease-out 0s;
@@ -71,10 +99,22 @@ h1, h2, h3, h4, h5, h6 {
       -moz-transition: all .3s ease-out 0s;
       -o-transition: all .3s ease-out 0s;
 
+      &:focus {
+        display: inline-block;
+        color: $brand-color;
+        padding: 10px 30px;
+        font-family: 'Oswald', sans-serif;
+        font-weight: normal;
+        font-size: 18px;
+        background-color: #FDFDFD;
+        border: 2px solid $brand-color;
+        border-radius: 15px;
+      }
+
       &:hover {
-        background-color: #01B560;
+        background-color: $brand-color;
         color: #FDFDFD;
-        border: 1px solid #01B560;
+        border: 2px solid $brand-color;
 
         transition: all .3s ease-out 0s;
         -webkit-transition: all .3s ease-out 0s;
@@ -83,6 +123,17 @@ h1, h2, h3, h4, h5, h6 {
       }
     }
   }
+}
+
+.pager .disabled>a, .pager .disabled>a:focus, .pager .disabled>a:hover, .pager .disabled>span {
+    color: lighten(#33363A, 15%);
+    cursor: not-allowed;
+    border: 2px solid lighten(#33363A, 15%);
+    background-color: #FDFDFD;
+}
+
+.thumbnail {
+  border: 1px solid #DDE3EA;
 }
 
 .Select {
@@ -106,7 +157,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 0 20px;
 
   .main-box-header {
-    border-bottom: 1px solid #DDE3EA;
+    border-bottom: 1px solid $brand-color;
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;

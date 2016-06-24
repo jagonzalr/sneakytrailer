@@ -1,18 +1,22 @@
 
-import React, {
-  Component,
-  PropTypes
-} from 'react';
+// React
+import React, { PropTypes, Component } from 'react'
+import { RouteTransition } from 'react-router-transition'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
 import AsyncMovies from '../containers/AsyncMovies'
+import NavBar from '../components/NavBar'
 
-/* Populated by react-webpack-redux:reducer */
+// Styles
+require('static/styles.scss')
+
 class App extends Component {
   render() {
     return (
-      <AsyncMovies />
+      <div>
+        <NavBar />
+        <AsyncMovies />
+      </div>
     )
   }
 }

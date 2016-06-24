@@ -1,14 +1,14 @@
 // React
 import React, { PropTypes, Component } from 'react'
 import Masonry from 'react-masonry-component'
+import Transition from 'react-motion-ui-pack'
+import { TransitionMotion, presets, spring } from 'react-motion'
 
 // React Router
 import { Link } from 'react-router'
 
 // Components
 import MoviePoster from './MoviePoster'
-
-require('static/styles.scss')
 
 
 export default class Movies extends Component {
@@ -23,13 +23,28 @@ export default class Movies extends Component {
 
     return (
       <div className="row">
-        <Masonry
-          className={'main-box-content'}
-          disableImagesLoaded={false} // default false
-          updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
-        >
-          {childElements}
-        </Masonry>
+        <Transition
+          component="div"
+          enter={{
+            opacity: 1,
+            translateY: spring(10, {stiffness: 150, damping: 10}),
+            height: 'auto'
+          }}
+          leave={{
+            opacity: 0.2,
+            translateY: {val: -10},
+            height: 0,
+          }}
+        >  
+          <Masonry
+            key="masonry"
+            className={'main-box-content'}
+            disableImagesLoaded={false} // default false
+            updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
+          >
+            {childElements}
+          </Masonry>
+        </Transition>
       </div>
     )
   }

@@ -32,7 +32,8 @@ class AsyncMovies extends Component {
       startValue: 0,
       currentTime: 0, // store current time of animation
       startTime: null,
-      rafId: null
+      rafId: null,
+      showPagination: false
     }
   }
 
@@ -75,7 +76,6 @@ class AsyncMovies extends Component {
   }
 
   stopScrolling() {
-    console.log('stopScrolling')
     window.cancelAnimationFrame(this.state.rafId);
   }
 
@@ -96,44 +96,47 @@ class AsyncMovies extends Component {
     }
 
     return (
-      <div>
-        <NavBar />
-        <div className="container-fluid">
-          <section className="main-box">
-            <div className="row">
-              <div className="col-xs-12 main-box-header">
-                
-                  <div className="col-xs-6 col-sm-9">
-                    <h3>{title[this.state.filter]}</h3>
-                  </div>
-                  <div className="col-xs-6 col-sm-3">
-                    <Select
-                      name="form-field-name"
-                      value={this.state.filter}
-                      options={options}
-                      onChange={this.logChange}
-                    />
-                  
+      <div className="container">
+        <section className="main-box">
+          <div className="row">
+            <div className="col-xs-12 main-box-header">
+              
+                <div className="col-xs-6 col-sm-9">
+                  <h3>{title[this.state.filter]}</h3>
                 </div>
+                <div className="col-xs-6 col-sm-3">
+                  <Select
+                    name="form-field-name"
+                    value={this.state.filter}
+                    options={options}
+                    onChange={this.logChange}
+                  />
+                
               </div>
             </div>
-            {this.props.movies.length > 0 &&
+          </div>
+          {this.props.isLoading &&
+            <i className="fa fa-spinner fa-spin fa-3x fa-fw" style={{position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', color: '#33363A'}}></i>
+          }
+          {!this.props.isLoading &&this.props.movies.length > 0 &&
+            <div>
               <Movies movies={this.props.movies} />
-            }
-            <nav>
-              <ul className="pager">
-                <li className={this.props.page === 1 ? 'disabled' : ''} style={{marginRight: '5px'}}><a href="#" onClick={this.previousPage}>Previous</a></li>
-                <li className={this.props.page === this.props.totalPages ? 'disabled' : ''}><a href="#" onClick={this.nextPage}>Next</a></li>
-              </ul>
-            </nav>
-          </section>
-          <ScrollToTop showUnder={250}>
-            <span className="fa-stack fa-2x">
-              <i className="fa fa-circle fa-stack-2x" style={{color: '#01B560'}}></i>
-              <i className="fa fa-angle-double-up fa-stack-1x fa-inverse"></i>
-            </span>
-          </ScrollToTop>
-        </div>
+              <nav>
+                <ul className="pager">
+                  <li className={this.props.page === 1 ? 'disabled' : ''} style={{marginRight: '5px'}}><a href="#" onClick={this.props.page > 1 ? this.previousPage: null}>Previous</a></li>
+                  <li className={this.props.page === this.props.totalPages ? 'disabled' : ''}><a href="#" onClick={this.nextPage}>Next</a></li>
+                </ul>
+                <p><img src='/static/images/moviedb.png' style={{width: '200px'}}/></p>
+              </nav>
+            </div>
+          }
+        </section>
+        <ScrollToTop showUnder={750}>
+          <span className="fa-stack fa-2x">
+            <i className="fa fa-circle fa-stack-2x" style={{color: '#df405a'}}></i>
+            <i className="fa fa-angle-double-up fa-stack-1x fa-inverse"></i>
+          </span>
+        </ScrollToTop>
       </div>
     )
   }
@@ -142,22 +145,26 @@ class AsyncMovies extends Component {
 AsyncMovies.propTypes = {
   movies: PropTypes.array.isRequired,
   page: PropTypes.number.isRequired,
-  totalPages: PropTypes.number.isRequired
+  totalPages: PropTypes.number.isRequired,
+  isLoading: PropTypes.bool.isRequired
 }
 
 function mapStateToProps(state) {
   const { rootReducer } = state
 
   const {
+    isLoading: isLoading,
     movies: movies,
     page: page,
     totalPages: totalPages
   } = rootReducer.fetchMovies || {
+    isLoading: true,
     movies: [],
     page: 1,
     totalPages: 1
   }
   return {
+    isLoading,
     movies,
     page,
     totalPages

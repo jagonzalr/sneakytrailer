@@ -1,7 +1,6 @@
 
-require('static/styles.scss')
-
 import React, { Component, PropTypes } from 'react'
+import { Link } from 'react-router'
 
 import {
   API_IMAGE_URL,
@@ -26,15 +25,16 @@ class NavBar extends Component {
               <span className="icon-bar"></span> 
               <span className="icon-bar"></span> 
             </button> 
-            <a className="navbar-brand" href="#">Sneaky Trailer</a> 
+            <a className="navbar-brand" href="/">Sneaky Trailer</a> 
           </div> 
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-6"> 
             <ul className="nav navbar-nav"> 
               <li className="active">
-                <a href="#">Discovery</a>
+                <Link to='/discovery'>
+                  Discovery
+                </Link>
               </li> 
             </ul>
-            
           </div> 
         </div> 
       </nav>
