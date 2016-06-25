@@ -2,7 +2,6 @@
 import React, { PropTypes, Component } from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
-import Select from 'react-select'
 import ScrollToTop from 'react-scroll-up'
 import TweenFunctions from 'tween-functions'
 
@@ -15,22 +14,23 @@ import {
 } from '../actions'
 
 import Movies from '../components/Movies'
-import NavBar from '../components/NavBar'
+import MoviesHeader from '../components/MoviesHeader'
+import Pager from '../components/Pager'
 
 class AsyncMovies extends Component {
   constructor(props) {
     super(props)
 
-    this.logChange = this.logChange.bind(this)
-    this.previousPage = this.previousPage.bind(this)
+    this.selectChange = this.selectChange.bind(this)
     this.nextPage = this.nextPage.bind(this)
+    this.previousPage = this.previousPage.bind(this)
     this.scrollStep = this.scrollStep.bind(this)
     this.stopScrolling = this.stopScrolling.bind(this)
 
     this.state = {
       filter: API_MOVIE_NOW_PLAYING,
       startValue: 0,
-      currentTime: 0, // store current time of animation
+      currentTime: 0,
       startTime: null,
       rafId: null,
       showPagination: false
@@ -41,31 +41,48 @@ class AsyncMovies extends Component {
     this.props.dispatch(fetchMovies(this.state.filter, 0))
   }
 
-  logChange(select) {
+  previousPage(e) {
+    e.preventDefault()
+    var previousPage = this.props.page - 1 
+    if (previousPage > 0) {
+      this.setState({
+        startValue: window.pageYOffset, 
+        currentTime: 0, 
+        startTime: null, 
+        rafId: window.requestAnimationFrame(this.scrollStep)
+      })
+
+      this.props.dispatch(fetchMovies(this.state.filter, previousPage))
+    }
+    
+  }
+
+  nextPage(e) {
+    e.preventDefault() 
+    var nextPage = this.props.page + 1
+    if (nextPage <= this.props.totalPages ) {
+      this.setState({
+        startValue: window.pageYOffset, 
+        currentTime: 0, 
+        startTime: null, 
+        rafId: window.requestAnimationFrame(this.scrollStep)
+      })
+
+      this.props.dispatch(fetchMovies(this.state.filter, nextPage))
+    }
+  }
+
+  selectChange(select) {
     if (select) {
       this.setState({filter: select.value})
       this.props.dispatch(fetchMovies(select.value, 0))
     }
   }
 
-  previousPage(e) {
-    e.preventDefault()
-    var previousPage = this.props.page - 1 
-    this.setState({startValue: window.pageYOffset, currentTime: 0, startTime: null, rafId: window.requestAnimationFrame(this.scrollStep)})
-    this.props.dispatch(fetchMovies(this.state.filter, previousPage))
-  }
-
-  nextPage(e) {
-    e.preventDefault() 
-    var nextPage = this.props.page + 1
-    this.setState({startValue: window.pageYOffset, currentTime: 0, startTime: null, rafId: window.requestAnimationFrame(this.scrollStep)})
-    this.props.dispatch(fetchMovies(this.state.filter, nextPage))
-  }
-
   scrollStep() {
     var timestamp = Date()
 
-    var position = TweenFunctions['easeOutCubic'](timestamp, this.state.startValue, 0, 500);
+    var position = TweenFunctions['easeOutCubic'](timestamp, this.state.startValue, 0, 0);
 
     if (window.pageYOffset <= 0) {
         this.stopScrolling();
@@ -88,7 +105,7 @@ class AsyncMovies extends Component {
       { value: API_MOVIE_UPCOMING, label: 'Upcoming' }
     ]
 
-    var title = {
+    var titles = {
       API_MOVIE_NOW_PLAYING: 'Now Playing',
       API_MOVIE_POPULAR: 'Popular',
       API_MOVIE_TOP_RATED: 'Top Rated',
@@ -97,46 +114,40 @@ class AsyncMovies extends Component {
 
     return (
       <div className="container">
+
         <section className="main-box">
-          <div className="row">
-            <div className="col-xs-12 main-box-header">
-              
-                <div className="col-xs-6 col-sm-9">
-                  <h3>{title[this.state.filter]}</h3>
-                </div>
-                <div className="col-xs-6 col-sm-3">
-                  <Select
-                    name="form-field-name"
-                    value={this.state.filter}
-                    options={options}
-                    onChange={this.logChange}
-                  />
-                
-              </div>
-            </div>
-          </div>
+          
+          <MoviesHeader 
+            titles={titles} 
+            filter={this.state.filter} 
+            options={options} 
+            selectChange={this.selectChange} />
+
           {this.props.isLoading &&
-            <i className="fa fa-spinner fa-spin fa-3x fa-fw" style={{position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', color: '#33363A'}}></i>
+             <i className="fa fa-spinner fa-spin fa-3x fa-fw loading"></i>
           }
-          {!this.props.isLoading &&this.props.movies.length > 0 &&
+
+          {!this.props.isLoading && this.props.movies.length > 0 &&
             <div>
               <Movies movies={this.props.movies} />
-              <nav>
-                <ul className="pager">
-                  <li className={this.props.page === 1 ? 'disabled' : ''} style={{marginRight: '5px'}}><a href="#" onClick={this.props.page > 1 ? this.previousPage: null}>Previous</a></li>
-                  <li className={this.props.page === this.props.totalPages ? 'disabled' : ''}><a href="#" onClick={this.nextPage}>Next</a></li>
-                </ul>
-                <p><img src='/static/images/moviedb.png' style={{width: '200px'}}/></p>
-              </nav>
+              <Pager 
+                current={this.props.page} 
+                total={this.props.totalPages} 
+                previousPage={this.previousPage} 
+                nextPage={this.nextPage} 
+                showMovieDBLogo={true} />
             </div>
           }
+
         </section>
-        <ScrollToTop showUnder={750}>
+
+        <ScrollToTop showUnder={600}>
           <span className="fa-stack fa-2x">
-            <i className="fa fa-circle fa-stack-2x" style={{color: '#df405a'}}></i>
+            <i className="fa fa-circle fa-stack-2x scroll-to-top"></i>
             <i className="fa fa-angle-double-up fa-stack-1x fa-inverse"></i>
           </span>
         </ScrollToTop>
+
       </div>
     )
   }

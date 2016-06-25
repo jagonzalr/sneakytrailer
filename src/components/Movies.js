@@ -2,10 +2,7 @@
 import React, { PropTypes, Component } from 'react'
 import Masonry from 'react-masonry-component'
 import Transition from 'react-motion-ui-pack'
-import { TransitionMotion, presets, spring } from 'react-motion'
-
-// React Router
-import { Link } from 'react-router'
+import { spring } from 'react-motion'
 
 // Components
 import MoviePoster from './MoviePoster'
@@ -18,7 +15,11 @@ export default class Movies extends Component {
 
   render() {
     var childElements = this.props.movies.map((movie, i) =>
-      <MoviePoster key={i} posterPath={movie.poster_path} title={movie.original_title} />
+      <MoviePoster 
+        key={i} 
+        posterPath={movie.poster_path} 
+        title={movie.original_title} 
+        movieId={movie.id} />
     )
 
     return (
@@ -39,8 +40,8 @@ export default class Movies extends Component {
           <Masonry
             key="masonry"
             className={'main-box-content'}
-            disableImagesLoaded={false} // default false
-            updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
+            disableImagesLoaded={false} 
+            updateOnEachImageLoad={false}
           >
             {childElements}
           </Masonry>

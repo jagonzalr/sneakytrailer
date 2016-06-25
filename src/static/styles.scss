@@ -2,13 +2,17 @@
 @import url(https://fonts.googleapis.com/css?family=Oswald:400,700|Raleway&subset=latin-ext);
 
 // Variables
-$brand-color: #df405a;
+$brand-color: #E95C40; // #df405a;
+$text: #2E2F34;
+$background: #F9F9F9;
+$white: #FDFDFD;
+$light-gray: #DDE3EA;
+$dark-gray: #86858D;
 
 // Overwrite
 body {
   font-family: 'Raleway', sans-serif;
-  background-color: #f9f9f9;
-  color: #1C252C;
+  background-color: $background;
   padding-top: 70px;
 }
 
@@ -16,48 +20,37 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Oswald', sans-serif;
   font-weight: bold;
   margin-top: 10px;
-  color: #33363A;
+  color: $text;
 }
 
-h1 { font-size: 50px; }
+h1 { font-size: 45px; }
+h2 { font-size: 40px; }
+h3 { font-size: 35px; }
+h4 { font-size: 30px; }
+h5 { font-size: 25px; }
+h6 { font-size: 20px; }
 
-h2 {
-  font-size: 45px;
-}
-
-h3 {
-  font-size: 40px;
-}
-
-h4 {
-  font-size: 35px;
-}
-
-h5 {
-  font-size: 30px;
-}
-
-h6 {
-  font-size: 25px;
+a {
+  outline: none;
 }
 
 .navbar-default {
-  background-color: #FDFDFD;
-  border-color: #DDE3EA;
+  background-color: $white;
+  border-color: $light-gray;
 
   .navbar-nav > {
     li > a {
-      color: #86858D;
+      color: $dark-gray;
       &:focus {
-        color: #86858D;
+        color: $dark-gray;
       }
     }
     .active > a {
-      color: #33363A;
-      background-color: #FDFDFD;
+      color: $text;
+      background-color: $white;
       &:focus, &:hover {
-        color: #33363A;
-        background-color: #FDFDFD;
+        color: $text;
+        background-color: $white;
       }
     }
   }
@@ -76,7 +69,7 @@ h6 {
     }
   }
   .navbar-nav > li > a:hover {
-    color: #86858D;
+    color: $dark-gray;
     text-decoration: underline;
   }
 }
@@ -85,12 +78,12 @@ h6 {
   li {
     a {
       display: inline-block;
-      color: $brand-color;
+      color: $text;
       padding: 10px 30px;
       font-family: 'Oswald', sans-serif;
       font-weight: normal;
       font-size: 18px;
-      background-color: #FDFDFD;
+      background-color: $white;
       border: 2px solid $brand-color;
       border-radius: 15px;
 
@@ -101,19 +94,19 @@ h6 {
 
       &:focus {
         display: inline-block;
-        color: $brand-color;
+        color: $text;
         padding: 10px 30px;
         font-family: 'Oswald', sans-serif;
         font-weight: normal;
         font-size: 18px;
-        background-color: #FDFDFD;
+        background-color: $white;
         border: 2px solid $brand-color;
         border-radius: 15px;
       }
 
       &:hover {
         background-color: $brand-color;
-        color: #FDFDFD;
+        color: $white;
         border: 2px solid $brand-color;
 
         transition: all .3s ease-out 0s;
@@ -126,14 +119,36 @@ h6 {
 }
 
 .pager .disabled>a, .pager .disabled>a:focus, .pager .disabled>a:hover, .pager .disabled>span {
-    color: lighten(#33363A, 15%);
+    color: lighten($text, 15%);
     cursor: not-allowed;
-    border: 2px solid lighten(#33363A, 15%);
-    background-color: #FDFDFD;
+    border: 2px solid lighten($brand-color, 15%);
+    background-color: $white;
 }
 
 .thumbnail {
-  border: 1px solid #DDE3EA;
+  border: 1px solid $light-gray;
+
+  transition: all .3s ease-out 0s;
+  -webkit-transition: all .3s ease-out 0s;
+  -moz-transition: all .3s ease-out 0s;
+  -o-transition: all .3s ease-out 0s;
+
+  &:hover {
+    border-color: $brand-color;
+
+    transition: all .3s ease-out 0s;
+    -webkit-transition: all .3s ease-out 0s;
+    -moz-transition: all .3s ease-out 0s;
+    -o-transition: all .3s ease-out 0s;
+  }
+
+  a {
+    outline: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
 
 .Select {
@@ -149,10 +164,65 @@ h6 {
 }
 
 // Custom
+.close-modal {
+    display:block;
+    width:50px;
+    height:50px;
+    line-height:43px;
+    cursor: pointer;
+    border-radius: 50%;
+    color:$white;
+    text-align:center;
+    text-decoration:none;
+    background: lighten($brand-color, 10%);
+    font-family: "Raleway", sans-serif;
+    font-size:35px;
+    font-weight:normal;
+    float: right;
+    margin-bottom: 10px;
+
+    transition: all .3s ease-out 0s;
+    -webkit-transition: all .3s ease-out 0s;
+    -moz-transition: all .3s ease-out 0s;
+    -o-transition: all .3s ease-out 0s;
+
+    &:hover {
+      color: $white;
+      background: $brand-color;
+
+      transition: all .3s ease-out 0s;
+      -webkit-transition: all .3s ease-out 0s;
+      -moz-transition: all .3s ease-out 0s;
+      -o-transition: all .3s ease-out 0s;
+    }
+  }
+
+
+.loading {
+  position: fixed; 
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: $brand-color;
+}
+
+.scroll-to-top {
+  color: $brand-color;
+}
+
+.placeholder {
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+  height: 300px;
+  color: $brand-color;
+  vertical-align: center;
+  line-height: 300px
+}
 
 .main-box {
-  background: #FDFDFD;
-  border: 1px solid #DDE3EA;
+  background: $white;
+  border: 1px solid $light-gray;
   padding: 0 20px 20px 20px;
   margin: 0 0 20px;
 
@@ -172,187 +242,6 @@ h6 {
 
   .main-box-content {
     margin-top: 20px;
-  }
-}
-
-
-/*
-* My Tasks styles
-*/
-
-.async-recent-activity-container {
-  background-color: lighten(#FCFDFD, 5%);
-
-  .async-recent-activity-title {
-
-    h2 {
-      text-transform: uppercase;
-      font-weight: bold;
-      font-size: 1em;
-      text-align: center;
-    }
-  }
-
-  .my-task-anchor {
-
-    .my-task-container {
-      color: lighten(#4C6DE4, 10%);
-      margin: 10px;
-      padding: 10px;
-      background-color: lighten(#FCFDFD, 5%);
-      border-bottom: 1px solid;
-      border-color: lighten(#4C6DE4, 5%);
-
-      transition: all .3s ease-out 0s;
-      -webkit-transition: all .3s ease-out 0s;
-      -moz-transition: all .3s ease-out 0s;
-      -o-transition: all .3s ease-out 0s;
-
-      &:hover {
-        color: #4C6DE4;
-        transition: all .3s ease-out 0s;
-        -webkit-transition: all .3s ease-out 0s;
-        -moz-transition: all .3s ease-out 0s;
-        -o-transition: all .3s ease-out 0s;
-      }
-
-      .my-task-title {
-        font-weight: normal;
-        font-size: 0.9em;
-        margin: auto;
-      }
-
-      .my-task-subtitle {
-        font-weight: bold;
-        font-size: 0.9em;
-        text-transform: uppercase;
-        margin: auto;
-      }
-    }
-  }
-}
-
-/*
-* Recent Activity styles
-*/
-
-.async-recent-activity-container {
-  background-color: lighten(#FCFDFD, 5%);
-
-  .async-recent-activity-title {
-
-    h2 {
-      text-transform: uppercase;
-      font-weight: bold;
-      font-size: 1em;
-      text-align: center;
-    }
-  }
-
-  .recent-activity-anchor {
-
-    .recent-activity-container {
-      color: lighten(#4C6DE4, 10%);
-      margin: 10px;
-      padding: 10px;
-      background-color: lighten(#FCFDFD, 5%);
-      border-bottom: 1px solid;
-      border-color: lighten(#4C6DE4, 5%);
-
-      transition: all .3s ease-out 0s;
-      -webkit-transition: all .3s ease-out 0s;
-      -moz-transition: all .3s ease-out 0s;
-      -o-transition: all .3s ease-out 0s;
-
-      &:hover {
-        color: #4C6DE4;
-        transition: all .3s ease-out 0s;
-        -webkit-transition: all .3s ease-out 0s;
-        -moz-transition: all .3s ease-out 0s;
-        -o-transition: all .3s ease-out 0s;
-      }
-
-      .recent-activity-title {
-        font-weight: normal;
-        font-size: 0.9em;
-        margin: auto;
-      }
-
-      .recent-activity-subtitle {
-        font-weight: bold;
-        font-size: 0.9em;
-        text-transform: uppercase;
-        margin: auto;
-      }
-
-      .recent-activity-responsible {
-        p {
-          font-weight: normal;
-          font-size: 0.9em;
-          float: right;
-          margin: auto;
-        }
-      }
-
-      .recent-activity-datetime {
-        p {
-          font-weight: bold;
-          font-size: 0.7em;
-          float: right;
-          margin: auto;
-        }
-      }
-    }
-  }
-}
-
-/*
-* Team Card styles
-*/
-
-.team-card-anchor {
-  .team-card-container {
-  
-    color: #FCFDFD;
-    margin: 10px;
-    padding: 40px 10px 20px 10px;
-    border-radius: 4px;
-    background-color: lighten(#4C6DE4, 5%);
-    border: 2px solid lighten(#4C6DE4, 5%);
-
-    transition: all .3s ease-out 0s;
-    -webkit-transition: all .3s ease-out 0s;
-    -moz-transition: all .3s ease-out 0s;
-    -o-transition: all .3s ease-out 0s;
-
-    &:hover {
-      background-color: #4C6DE4; //#4D524B;
-      border: 2px solid #4C6DE4; //#4D524B;
-
-      transition: all .3s ease-out 0s;
-      -webkit-transition: all .3s ease-out 0s;
-      -moz-transition: all .3s ease-out 0s;
-      -o-transition: all .3s ease-out 0s;
-    }
-
-    .team-card-name {
-      h2 {
-        margin: auto;
-        font-size: 2.0em;
-        font-weight: normal;
-        font-family: 'Oswald', sans-serif;
-        text-transform: uppercase;
-      }
-    }
-
-    .team-card-confidence {
-      margin-top: 20px;
-      p {
-        margin: auto;
-        font-size: 2.0em;
-        font-family: 'Oswald', sans-serif;
-        font-weight: normal;
-      }
-    }
+    outline: none
   }
 }

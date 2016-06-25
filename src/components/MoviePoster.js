@@ -1,62 +1,92 @@
 
 import React, { Component, PropTypes } from 'react'
+import Modal from 'react-modal'
+import { connect } from 'react-redux'
+import YouTube from 'react-youtube'
+
+import { fetchMovieVideos } from '../actions'
 
 import {
   API_IMAGE_URL,
-  API_IMAGE_SIZE_ORIGINAL,
-  API_IMAGE_SIZE_W780,
-  API_IMAGE_SIZE_H632
+  API_IMAGE_SIZE_ORIGINAL
 } from '../actions'
+
+import MovieVideos from './MovieVideos'
 
 class MoviePoster extends Component {
   constructor(props) {
     super(props)
 
-    this.handleImageLoaded = this.handleImageLoaded.bind(this)
-    this.handleImageErrored = this.handleImageErrored.bind(this)
+    this.onImageLoaded  = this.onImageLoaded.bind(this)
+    this.onImageErrored = this.onImageErrored.bind(this)
+    this.openModal      = this.openModal.bind(this)
+    this.afterOpenModal = this.afterOpenModal.bind(this)
+    this.closeModal     = this.closeModal.bind(this)
 
     this.state = {
-      showPlaceholder: true,
-      hideImage: false
-
+      showPlaceholder : true,
+      modalIsOpen     : false
     }
   }
 
-  handleImageLoaded() {
+  openModal() {
+    this.setState({modalIsOpen: true});
+  }
+
+  afterOpenModal() {}
+
+  closeModal() {
+    this.setState({modalIsOpen: false});
+  }
+
+  onImageLoaded() {
     this.setState({showPlaceholder: false})
   }
 
-  handleImageErrored() {
-    this.setState({showPlaceholder: true, hideImage: true})
+  onImageErrored() {
+    this.setState({showPlaceholder: true})
   }
 
   render() {
-    var posterUrl = API_IMAGE_URL + API_IMAGE_SIZE_ORIGINAL + this.props.posterPath
+    const posterUrl = API_IMAGE_URL + API_IMAGE_SIZE_ORIGINAL + this.props.posterPath
+    const hideImage = this.props.posterPath ? false : true
 
-    const opts = {
-      height: '390',
-      width: '640',
-      playerVars: { // https://developers.google.com/youtube/player_parameters
-        autoplay: 1
+    const customStyles = {
+      content : {
+        backgroundColor : '#FDFDFD',
+        top             : '50%',
+        left            : '50%',
+        right           : 'auto',
+        bottom          : 'auto',
+        marginTop       : '80px',
+        outline         : 'none'
       }
-    };
+    }
     
     return (
       <div className="col-xs-12 col-sm-6 col-md-3">
-        <div className="thumbnail" target="_blank">
-          <a href="#" style={{textAlign: 'center'}}>
-          {!this.state.hideImage &&
-            <img onLoad={this.handleImageLoaded} onError={this.handleImageErrored} src={posterUrl} alt={this.props.title} />
+        <div className="thumbnail">
+          <a href="#" style={{textAlign: 'center'}} onClick={this.openModal}>
+          {!hideImage &&
+            <img onLoad={this.onImageLoaded} onError={this.onImageErrored} src={posterUrl} alt={this.props.title} />
           }
           
           {this.state.showPlaceholder &&
             <div>
-              <i className="fa fa-picture-o fa-5x" aria-hidden="true" style={{textAlign: 'center', display: 'inline-block', width: '100%', height: '300px', color: '#33363A', 'verticalAlign': 'center', 'lineHeight': '300px'}}></i>
+              <i className="fa fa-picture-o fa-5x placeholder" aria-hidden="true"></i>
               <h5>{this.props.title}</h5>
             </div>
           }
           </a>
         </div>
+        <Modal
+          isOpen={this.state.modalIsOpen}          
+          onAfterOpen={this.afterOpenModal}
+          className={'container'}
+          onRequestClose={this.closeModal}
+          style={customStyles}>
+            <MovieVideos movieId={this.props.movieId} closeModal={this.closeModal} />
+        </Modal>
       </div>
     )
   }
@@ -64,4 +94,8 @@ class MoviePoster extends Component {
 
 MoviePoster.propTypes = {}
 
-export default MoviePoster
+function mapStateToProps(state) {
+  return {}
+}
+
+export default connect(mapStateToProps)(MoviePoster)

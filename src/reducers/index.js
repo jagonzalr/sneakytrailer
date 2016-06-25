@@ -2,11 +2,12 @@
 import { combineReducers } from 'redux';
 
 import {
-  REQUEST_FETCH_MOVIES, RECEIVE_FETCH_MOVIES
+  REQUEST_FETCH_MOVIES, RECEIVE_FETCH_MOVIES,
+  REQUEST_FETCH_MOVIE_VIDEOS, RECEIVE_FETCH_MOVIE_VIDEOS
 } from '../actions'
 
 export function fetchMovies(state = {
-  isLoading: false,
+  isLoading: true,
   movies: [],
   page: 1,
   totalPages: 1
@@ -28,8 +29,32 @@ export function fetchMovies(state = {
   }
 }
 
+export function fetchMovieVideos(state = {
+  isLoading: true,
+  videos: [],
+  videoNumber: 0,
+  totalVideos: 0
+}, action) {
+  switch(action.type) {
+    case REQUEST_FETCH_MOVIE_VIDEOS:
+      return Object.assign({}, state, {
+        isLoading: true
+      })
+    case RECEIVE_FETCH_MOVIE_VIDEOS:
+      return Object.assign({}, state, {
+        isLoading: false,
+        videos: action.json.results,
+        videoNumber: action.json.results.length > 0 ? 1 : 0,
+        totalVideos: action.json.results.length
+      })
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
-  fetchMovies
+  fetchMovies,
+  fetchMovieVideos
 })
 
 export default rootReducer
