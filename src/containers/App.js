@@ -8,7 +8,7 @@ import AsyncMovies from '../containers/AsyncMovies'
 import NavBar from '../components/NavBar'
 
 // Styles
-require('static/styles.scss')
+require('../styles/main.scss')
 
 class App extends Component {
   render() {

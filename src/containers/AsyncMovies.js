@@ -1,6 +1,5 @@
 
 import React, { PropTypes, Component } from 'react'
-import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 import ScrollToTop from 'react-scroll-up'
 import TweenFunctions from 'tween-functions'

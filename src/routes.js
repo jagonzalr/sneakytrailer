@@ -12,7 +12,6 @@ import AsyncMovies from './containers/AsyncMovies'
 const routes = (
   <Route path="/" component={App}>
     <IndexRoute component={AsyncMovies} />
-    <Route path="/discovery" component={AsyncMovies} />
   </Route>
 )
 

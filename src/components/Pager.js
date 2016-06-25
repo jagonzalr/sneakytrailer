@@ -29,7 +29,7 @@ class Pager extends Component {
         {this.props.showMovieDBLogo &&
           <p>
             <a href="https://www.themoviedb.org/" target="_blank">
-              <img src='/static/images/moviedb.png' style={{width: '200px'}}/>
+              <img src='https://assets.tmdb.org/images/logos/var_1_0_PoweredByTMDB_Blk_Antitled.png' style={{width: '200px'}}/>
             </a>
           </p>
         }

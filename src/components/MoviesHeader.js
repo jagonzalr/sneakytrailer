@@ -1,5 +1,5 @@
 
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import Select from 'react-select'
 
 class MoviesHeader extends Component {
@@ -27,7 +27,5 @@ class MoviesHeader extends Component {
     )
   }
 }
-
-MoviesHeader.propTypes = {}
 
 export default MoviesHeader

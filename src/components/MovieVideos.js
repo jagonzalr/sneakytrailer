@@ -1,6 +1,5 @@
 
 import React, { Component, PropTypes } from 'react'
-import Modal from 'react-modal'
 import { connect } from 'react-redux'
 import YouTube from 'react-youtube'
 

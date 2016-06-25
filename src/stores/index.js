@@ -20,7 +20,7 @@ export default function configureStore(history, initialState) {
     initialState,
     applyMiddleware(
       thunkMiddleware,
-      loggerMiddleware, // remove in production
+      //loggerMiddleware,
       routerMiddleware(history)
     )
   );

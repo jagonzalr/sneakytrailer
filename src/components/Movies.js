@@ -34,7 +34,7 @@ export default class Movies extends Component {
           leave={{
             opacity: 0.2,
             translateY: {val: -10},
-            height: 0,
+            height: 0
           }}
         >  
           <Masonry
