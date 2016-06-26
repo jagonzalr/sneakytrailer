@@ -13,7 +13,7 @@ export const API_MOVIE_UPCOMING = 'API_MOVIE_UPCOMING'
 
 export const API_MOVIE_LIST_TYPES = {
   API_MOVIE_NOW_PLAYING: '/now_playing',
-  API_MOVIE_POPULAR: '/popular',  
+  API_MOVIE_POPULAR: '/popular',
   API_MOVIE_TOP_RATED: '/top_rated',
   API_MOVIE_UPCOMING: '/upcoming'
 }
@@ -51,7 +51,7 @@ export function fetchMovies(listType, page) {
     var url = API_URL + API_VERSION + API_MOVIE + API_MOVIE_LIST_TYPES[listType] + '?api_key=' + API_KEY
     if (page > 1) {
       url = url + '&page=' + page
-    } 
+    }
 
     return fetch(url, {
       headers: {

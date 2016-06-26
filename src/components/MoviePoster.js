@@ -1,10 +1,7 @@
 
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import Modal from 'react-modal'
 import { connect } from 'react-redux'
-import YouTube from 'react-youtube'
-
-import { fetchMovieVideos } from '../actions'
 
 import {
   API_IMAGE_URL,
@@ -80,7 +77,7 @@ class MoviePoster extends Component {
           </a>
         </div>
         <Modal
-          isOpen={this.state.modalIsOpen}          
+          isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
           className={'container'}
           onRequestClose={this.closeModal}
@@ -91,8 +88,6 @@ class MoviePoster extends Component {
     )
   }
 }
-
-MoviePoster.propTypes = {}
 
 function mapStateToProps(state) {
   return {}

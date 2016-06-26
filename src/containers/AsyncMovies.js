@@ -42,12 +42,12 @@ class AsyncMovies extends Component {
 
   previousPage(e) {
     e.preventDefault()
-    var previousPage = this.props.page - 1 
+    var previousPage = this.props.page - 1
     if (previousPage > 0) {
       this.setState({
-        startValue: window.pageYOffset, 
-        currentTime: 0, 
-        startTime: null, 
+        startValue: window.pageYOffset,
+        currentTime: 0,
+        startTime: null,
         rafId: window.requestAnimationFrame(this.scrollStep)
       })
 
@@ -57,13 +57,13 @@ class AsyncMovies extends Component {
   }
 
   nextPage(e) {
-    e.preventDefault() 
+    e.preventDefault()
     var nextPage = this.props.page + 1
     if (nextPage <= this.props.totalPages ) {
       this.setState({
-        startValue: window.pageYOffset, 
-        currentTime: 0, 
-        startTime: null, 
+        startValue: window.pageYOffset,
+        currentTime: 0,
+        startTime: null,
         rafId: window.requestAnimationFrame(this.scrollStep)
       })
 
@@ -116,10 +116,10 @@ class AsyncMovies extends Component {
 
         <section className="main-box">
           
-          <MoviesHeader 
-            titles={titles} 
-            filter={this.state.filter} 
-            options={options} 
+          <MoviesHeader
+            titles={titles}
+            filter={this.state.filter}
+            options={options}
             selectChange={this.selectChange} />
 
           {this.props.isLoading &&
@@ -129,11 +129,11 @@ class AsyncMovies extends Component {
           {!this.props.isLoading && this.props.movies.length > 0 &&
             <div>
               <Movies movies={this.props.movies} />
-              <Pager 
-                current={this.props.page} 
-                total={this.props.totalPages} 
-                previousPage={this.previousPage} 
-                nextPage={this.nextPage} 
+              <Pager
+                current={this.props.page}
+                total={this.props.totalPages}
+                previousPage={this.previousPage}
+                nextPage={this.nextPage}
                 showMovieDBLogo={true} />
             </div>
           }

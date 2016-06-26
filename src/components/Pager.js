@@ -1,5 +1,5 @@
 
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 
 class Pager extends Component {
   constructor(props) {
@@ -37,7 +37,5 @@ class Pager extends Component {
     )
   }
 }
-
-Pager.propTypes = {}
 
 export default Pager

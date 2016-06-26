@@ -8,12 +8,12 @@ class NavBar extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-default navbar-fixed-top">  
-        <div className="container-fluid"> 
-          <div className="navbar-header"> 
-            <a className="navbar-brand" href="/">Sneaky Trailer</a> 
-          </div> 
-        </div> 
+      <nav className="navbar navbar-default navbar-fixed-top">
+        <div className="container-fluid">
+          <div className="navbar-header">
+            <a className="navbar-brand" href="/">Sneaky Trailer</a>
+          </div>
+        </div>
       </nav>
     )
   }

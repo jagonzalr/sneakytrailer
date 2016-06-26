@@ -15,10 +15,10 @@ export default class Movies extends Component {
 
   render() {
     var childElements = this.props.movies.map((movie, i) =>
-      <MoviePoster 
-        key={i} 
-        posterPath={movie.poster_path} 
-        title={movie.original_title} 
+      <MoviePoster
+        key={i}
+        posterPath={movie.poster_path}
+        title={movie.original_title}
         movieId={movie.id} />
     )
 
@@ -36,11 +36,11 @@ export default class Movies extends Component {
             translateY: {val: -10},
             height: 0
           }}
-        >  
+        >
           <Masonry
             key="masonry"
             className={'main-box-content'}
-            disableImagesLoaded={false} 
+            disableImagesLoaded={false}
             updateOnEachImageLoad={false}
           >
             {childElements}

@@ -1,0 +1,24 @@
+
+box: node
+build:
+  steps:
+    - npm-install
+    - script:
+        name: Build Sneaky Trailer
+        code: npm run dist
+
+deploy:
+    steps:
+        - edgecaseadmin/install-aws-cli:
+            key: $AWS_ACCESS_KEY_ID
+            secret: $AWS_SECRET_ACCESS_KEY
+            region: $AWS_DEFAULT_REGION
+        - script:
+            name: Clean S3
+            code: aws s3 rm $AWS_BUCKET_URL --recursive
+        - s3sync:
+            source_dir: ./dist
+            bucket-url: $AWS_BUCKET_URL
+            key-id: $AWS_ACCESS_KEY_ID
+            key-secret: $AWS_SECRET_ACCESS_KEY
+            opts: --acl-public

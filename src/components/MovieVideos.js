@@ -69,6 +69,7 @@ class MovieVideos extends Component {
     var videoList = []
     this.props.videos.map((video, i) =>
       videoList.push(<YouTube
+        key={i}
         videoId={video.key}
         className={"embed-responsive-item"}
         opts={youtubeOptions}
@@ -105,11 +106,11 @@ class MovieVideos extends Component {
             </div>
             <div className="row">
               <div className="col-xs-12">
-                <Pager 
-                  current={this.state.videoNumber} 
-                  total={this.state.totalVideos} 
-                  previousPage={this.previousPage} 
-                  nextPage={this.nextPage} 
+                <Pager
+                  current={this.state.videoNumber}
+                  total={this.state.totalVideos}
+                  previousPage={this.previousPage}
+                  nextPage={this.nextPage}
                   showMovieDBLogo={false} />
               </div>
             </div>
