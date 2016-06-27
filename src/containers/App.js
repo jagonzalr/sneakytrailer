@@ -15,7 +15,7 @@ class App extends Component {
     return (
       <div>
         <NavBar />
-        <AsyncMovies />
+        {this.props.children}
       </div>
     )
   }
