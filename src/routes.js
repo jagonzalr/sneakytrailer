@@ -13,7 +13,6 @@ import AsyncDiscovery from './containers/AsyncDiscovery'
 const routes = (
   <Route path="/" component={App}>
     <IndexRoute component={AsyncMovies} />
-    <Route path="/discovery" component={AsyncDiscovery} />
   </Route>
 )
 
