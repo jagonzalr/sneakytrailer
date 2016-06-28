@@ -2,7 +2,6 @@
 box: node
 build:
   steps:
-    - npm-install
     - script:
         name: Build Sneaky Trailer
         code: npm run dist
