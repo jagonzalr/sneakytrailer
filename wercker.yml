@@ -2,7 +2,9 @@
 box: node
 build:
   steps:
-    - npm rebuild node-sass
+    - script:
+        name: Rebuild node-sass
+        code: npm rebuild node-sass
     - script:
         name: Build Sneaky Trailer
         code: npm run dist
