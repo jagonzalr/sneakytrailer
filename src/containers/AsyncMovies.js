@@ -71,10 +71,10 @@ class AsyncMovies extends Component {
     }
   }
 
-  selectChange(select) {
-    if (select) {
-      this.setState({filter: select.value})
-      this.props.dispatch(fetchMovies(select.value, 0))
+  selectChange(value) {
+    if (value) {
+      this.setState({filter: value})
+      this.props.dispatch(fetchMovies(value, 0))
     }
   }
 
@@ -112,7 +112,7 @@ class AsyncMovies extends Component {
     }
 
     return (
-      <div className="container">
+      <div>
 
         <section className="main-box">
           

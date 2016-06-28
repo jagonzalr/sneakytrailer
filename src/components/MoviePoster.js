@@ -56,7 +56,8 @@ class MoviePoster extends Component {
         right           : 'auto',
         bottom          : 'auto',
         marginTop       : '80px',
-        outline         : 'none'
+        outline         : 'none',
+        zIndex          : '999'
       }
     }
     

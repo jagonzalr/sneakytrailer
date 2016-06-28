@@ -66,6 +66,7 @@
   },
   "dependencies": {
     "core-js": "^2.0.0",
+    "periodicjs.component.selectfx": "^1.0.0",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
     "react-masonry-component": "^4.0.4",

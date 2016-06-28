@@ -16,6 +16,15 @@ class NavBar extends Component {
               Sneaky Trailer
             </IndexLink>
           </div>
+          <div className="collapse navbar-collapse" id="navbar-header"> 
+            <ul className="nav navbar-nav"> 
+              <li className="active">
+                <Link to='/discovery'>
+                  Discovery
+                </Link>
+              </li> 
+            </ul>
+          </div> 
         </div>
       </nav>
     )

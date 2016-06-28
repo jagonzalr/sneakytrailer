@@ -10,6 +10,7 @@ export const API_MOVIE_NOW_PLAYING = 'API_MOVIE_NOW_PLAYING'
 export const API_MOVIE_POPULAR = 'API_MOVIE_POPULAR'
 export const API_MOVIE_TOP_RATED = 'API_MOVIE_TOP_RATED'
 export const API_MOVIE_UPCOMING = 'API_MOVIE_UPCOMING'
+export const API_SEARCH = '/search'
 
 export const API_MOVIE_LIST_TYPES = {
   API_MOVIE_NOW_PLAYING: '/now_playing',
@@ -27,6 +28,8 @@ export const REQUEST_FETCH_MOVIES = 'REQUEST_FETCH_MOVIES'
 export const RECEIVE_FETCH_MOVIES = 'RECEIVE_FETCH_MOVIES'
 export const REQUEST_FETCH_MOVIE_VIDEOS = 'REQUEST_FETCH_MOVIE_VIDEOS'
 export const RECEIVE_FETCH_MOVIE_VIDEOS = 'RECEIVE_FETCH_MOVIE_VIDEOS'
+export const REQUEST_SEARCH_MOVIE = 'REQUEST_SEARCH_MOVIE'
+export const RECEIVE_SEARCH_MOVIE = 'RECEIVE_SEARCH_MOVIE'
 
 export function requestFetchMovies(listType, page) {
   return {
@@ -91,5 +94,46 @@ export function fetchMovieVideos(movieId) {
     })
     .then(response => response.json())
     .then(json => dispatch(receiveFetchMovieVideos(movieId, json)))
+  }
+}
+
+export function requestSearchMovie(query, page) {
+  return {
+    type: REQUEST_SEARCH_MOVIE,
+    query,
+    page
+  }
+}
+
+export function receiveSearchMovie(query, page, json) {
+  return {
+    type: RECEIVE_SEARCH_MOVIE,
+    query,
+    page,
+    json
+  }
+}
+
+export function searchMovie(query, page) {
+  return dispatch => {
+    dispatch(requestSearchMovie(query, page))
+
+    if (query.length === 0) {
+      return dispatch(receiveSearchMovie(query, page, null))
+    } else {
+      var url = API_URL + API_VERSION + API_SEARCH + API_MOVIE + '?api_key=' + API_KEY + '&query=' + encodeURI(query)
+      if (page > 1) {
+        url = url + '&page=' + page
+      }
+
+      return fetch(url, {
+        headers: {
+          'Accept': 'application/json'
+        },
+        method: 'GET'
+      })
+      .then(response => response.json())
+      .then(json => dispatch(receiveSearchMovie(query, page, json)))
+    }
   }
 }
